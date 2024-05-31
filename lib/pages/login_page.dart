@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetp/pages/level_selection_screen.dart';
+import 'package:projetp/pages/select_avatar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LevelSelectionScreen(),
+                    builder: (context) => SelectAvatar(),
                   ));
             },
             style: ElevatedButton.styleFrom(
@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
               minimumSize: Size(150, 50), // This is the minimum size
             ),
             child: const Text(
-              'Connexion',
+              'Suivant',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
