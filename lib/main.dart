@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hello World',
       theme: ThemeData(
+        fontFamily: 'OpenDyslexic3',
         primarySwatch: Colors.blue,
       ),
       home: const LoginPage(),
