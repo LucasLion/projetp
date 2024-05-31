@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetp/pages/home_page.dart';
+import 'package:projetp/pages/level_selection_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -7,6 +7,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,7 +29,7 @@ class LoginPage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const HomePage(),
+                    builder: (context) => LevelSelectionScreen(),
                   ));
             },
             style: ElevatedButton.styleFrom(
