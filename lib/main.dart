@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetp/pages/level_map_page.dart';
 import 'package:projetp/pages/login_page.dart';
 import 'package:projetp/pages/level_selection_screen.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'OpenDyslexic3',
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: LevelMapPage(),
     );
   }
 }

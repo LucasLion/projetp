@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_selection_screen.dart';
+import 'package:projetp/pages/level_map_page.dart';
 
 class SelectAvatar extends StatefulWidget {
   const SelectAvatar({super.key});
@@ -18,40 +19,38 @@ Widget avatarData() {
       Text("Bio: "),
     ],
   );
-
 }
-Widget avatarCart(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LevelSelectionScreen(),
-            ));
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blueAccent),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-              const CircleAvatar(
-                radius: 40,
-                backgroundColor: Colors.blueAccent,
-                child: Icon(Icons.person, size: 30, color: Colors.white),
-              ),
-              avatarData(),
 
-              ]
-              ),
-          ),
+Widget avatarCart(BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            //builder: (context) => const LevelSelectionScreen(),
+            builder: (context) => LevelMapPage(),
+          ));
+    },
+    child: Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blueAccent),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(children: [
+            const CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.blueAccent,
+              child: Icon(Icons.person, size: 30, color: Colors.white),
+            ),
+            avatarData(),
+          ]),
         ),
       ),
-    );
+    ),
+  );
 }
 
 class _SelectAvatar extends State<SelectAvatar> {
