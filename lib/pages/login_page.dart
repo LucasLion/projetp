@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetp/pages/select_avatar.dart';
+import 'package:projetp/pages/select_avatar_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

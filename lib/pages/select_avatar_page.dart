@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projetp/pages/level_selection_screen.dart';
 import 'package:projetp/pages/level_map_page.dart';
 
 class SelectAvatar extends StatefulWidget {
@@ -27,8 +26,7 @@ Widget avatarCart(BuildContext context) {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            //builder: (context) => const LevelSelectionScreen(),
-            builder: (context) => LevelMapPage(),
+            builder: (context) => const LevelMapPage(),
           ));
     },
     child: Padding(
