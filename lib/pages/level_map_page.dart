@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetp/widgets/level_button.dart';
 import 'package:projetp/utils/line_painter.dart';
 
-
 class LevelMapPage extends StatefulWidget {
   const LevelMapPage({super.key});
 
@@ -13,18 +12,16 @@ class LevelMapPage extends StatefulWidget {
 }
 
 class _LevelMapPage extends State<LevelMapPage> {
-
   final ScrollController _scrollController = ScrollController();
-  int currentLevel = 2;
+  int currentLevel = 0;
 
   List<LevelData> levels = List.generate(
     20,
-        (index) =>
-        LevelData(
-          level: (index * 30 + 20),
-          icon: Icons.circle,
-          unlocked: index == 0,
-        ),
+    (index) => LevelData(
+      level: (index * 30 + 20),
+      icon: Icons.circle,
+      unlocked: index == 0,
+    ),
   );
 
   void resetLevels() {
@@ -32,26 +29,22 @@ class _LevelMapPage extends State<LevelMapPage> {
       currentLevel = 0;
       levels = List.generate(
         20,
-      (index) => LevelData(
-        level: (index * 30 + 20),
-        icon: Icons.circle,
-        unlocked: index == 0,
-      ),
+        (index) => LevelData(
+          level: (index * 30 + 20),
+          icon: Icons.circle,
+          unlocked: index == 0,
+        ),
       );
     });
   }
 
   Offset calculateLevelPosition(BuildContext context, int level) {
-    final path = CurvedLinePainter().createPath(Size(MediaQuery
-        .of(context)
-        .size
-        .width, 2500));
-    final metrics = path
-        .computeMetrics()
-        .first;
-    final position = metrics
-        .getTangentForOffset(level * metrics.length / 200)
-        ?.position ?? Offset.zero;
+    final path = CurvedLinePainter()
+        .createPath(Size(MediaQuery.of(context).size.width, 2500));
+    final metrics = path.computeMetrics().first;
+    final position =
+        metrics.getTangentForOffset(level * metrics.length / 200)?.position ??
+            Offset.zero;
     return position;
   }
 
@@ -70,9 +63,7 @@ class _LevelMapPage extends State<LevelMapPage> {
                   ),
                 ),
                 ...levels.map((level) {
-                  final position = calculateLevelPosition(
-                      context, level.level);
-                  print("\x1B[32mposition: $position\x1B[0m");
+                  final position = calculateLevelPosition(context, level.level);
                   return Positioned(
                     left: position.dx - 60,
                     top: position.dy - 60,
@@ -95,29 +86,29 @@ class _LevelMapPage extends State<LevelMapPage> {
     return Container(
       width: 100,
       child: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        child: const Text('Niveau suivant', style: TextStyle(fontSize: 20),
-            textAlign: TextAlign.center),
-        onPressed: () {
-          if (currentLevel < levels.length) {
-            currentLevel++;
-            final newLevelData = LevelData(
-              level: levels[currentLevel].level,
-              icon: levels[currentLevel].icon,
-              unlocked: true);
-            setState(() {
-              levels[currentLevel] = newLevelData;
-            });
-            final position = calculateLevelPosition(context, currentLevel);
-            _scrollController.animateTo(
-              (position.dy * 30),
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.easeInOut,
-            );
-            print(position.dy * 30);
-          }
-        }
-      ),
+          heroTag: 'nextLevel',
+          backgroundColor: Colors.blue,
+          child: const Text('Niveau suivant',
+              style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+          onPressed: () {
+            if (currentLevel < levels.length) {
+              print("currentLevel: $currentLevel");
+              currentLevel++;
+              final newLevelData = LevelData(
+                  level: levels[currentLevel].level,
+                  icon: levels[currentLevel].icon,
+                  unlocked: true);
+              setState(() {
+                levels[currentLevel] = newLevelData;
+              });
+              final position = calculateLevelPosition(context, currentLevel);
+              _scrollController.animateTo(
+                (position.dy * 30),
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.easeInOut,
+              );
+            }
+          }),
     );
   }
 
@@ -135,9 +126,11 @@ class _LevelMapPage extends State<LevelMapPage> {
           Container(
             width: 100,
             child: FloatingActionButton(
+              heroTag: 'reset',
               backgroundColor: Colors.red,
               onPressed: resetLevels,
-              child: const Text('Reset', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+              child: const Text('Reset',
+                  style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
             ),
           ),
           const SizedBox(height: 10),
@@ -147,6 +140,3 @@ class _LevelMapPage extends State<LevelMapPage> {
     );
   }
 }
-
-
-

@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectAvatar(),
+                    builder: (context) => const SelectAvatar(),
                   ));
             },
             style: ElevatedButton.styleFrom(

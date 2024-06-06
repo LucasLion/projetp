@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetp/widgets/level_button.dart';
+import 'package:projetp/widgets/level_menu_button.dart';
 
 class Level1 extends StatelessWidget {
   const Level1({super.key});
@@ -30,7 +30,8 @@ class Level1 extends StatelessWidget {
               )
             },
             child: const Text("Commencer le niveau"),
-          )
+          ),
+          const LevelMenuButton(),
         ],
       ),
     );
@@ -58,8 +59,8 @@ class Level1Question1 extends StatelessWidget {
         ElevatedButton(
           onPressed: () => {
             Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Level1Question1())
+             context,
+             MaterialPageRoute(builder: (context) => const Level1Question1())
             )
           },
           child: const Text("Question suivante"),

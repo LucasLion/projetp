@@ -10,18 +10,12 @@ class Levels {
   levelSelection(BuildContext context, int levelNumber) {
     switch (levelNumber) {
       case 1:
-        print("Level 1");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const Level1()));
         break;
       case 2:
-        print("Level 2");
         break;
     }
   }
 }
-
-class Navitator {
-}
-

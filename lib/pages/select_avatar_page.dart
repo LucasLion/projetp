@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_map_page.dart';
+import 'package:projetp/utils/variables.dart';
 
 class SelectAvatar extends StatefulWidget {
   const SelectAvatar({super.key});
@@ -10,62 +11,95 @@ class SelectAvatar extends StatefulWidget {
   }
 }
 
-Widget avatarData() {
-  return const Column(
-    children: [
-      Text("First Name: "),
-      Text("Last Name: "),
-      Text("Bio: "),
-    ],
-  );
-}
-
-Widget avatarCart(BuildContext context) {
-  return InkWell(
-    onTap: () {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LevelMapPage(),
-          ));
-    },
-    child: Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.blueAccent),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(children: [
-            const CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.blueAccent,
-              child: Icon(Icons.person, size: 30, color: Colors.white),
+class _SelectAvatar extends State<SelectAvatar> {
+  Widget avatarData(int index) {
+    return Container(
+      child: Column(
+        children: [
+          ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: Image(
+                    image: AssetImage(avatarsData[index]![3]),
+                    fit: BoxFit.cover,
+                  ))),
+          Text(
+            avatarsData[index]![0],
+            style: const TextStyle(fontSize: 30),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Text(
+              avatarsData[index]![1],
+              style: const TextStyle(fontSize: 30),
             ),
-            avatarData(),
-          ]),
+          ),
+          Expanded(
+              child:
+                  SingleChildScrollView(child: Text(avatarsData[index]![2]))),
+        ],
+      ),
+    );
+  }
+
+  Widget avatarCart(BuildContext context, int index) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LevelMapPage(),
+            ));
+      },
+      child: Padding(
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: avatarData(index),
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-class _SelectAvatar extends State<SelectAvatar> {
+// gros bug ici
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select your avatar'),
+        centerTitle: true,
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemBuilder: (context, index) {
-          return avatarCart(context);
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth >= 1024) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return avatarCart(context, index);
+                },
+              ),
+            );
+          } else {
+            return PageView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return avatarCart(context, index);
+              },
+              itemCount: 5,
+            );
+          }
         },
-        itemCount: 5,
       ),
     );
   }
