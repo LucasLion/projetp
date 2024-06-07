@@ -115,7 +115,7 @@ class _LevelMapPage extends State<LevelMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.lime,
       appBar: AppBar(
         title: Text('Sélection du Niveau'),
       ),

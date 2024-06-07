@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/select_avatar_page.dart';
 
-class LoginPage extends StatelessWidget {
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() {
+    return _LoginPageState();
+  }
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  final TextEditingController pseudoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +22,11 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 30.0, right: 30.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
             child: TextField(
-              decoration: InputDecoration(
+              controller: pseudoController,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Pseudo',
               ),
@@ -29,7 +41,7 @@ class LoginPage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SelectAvatar(),
+                    builder: (context) => SelectAvatar(playerName: pseudoController.text),
                   ));
             },
             style: ElevatedButton.styleFrom(
@@ -37,8 +49,8 @@ class LoginPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20), // This is the border radius
               ),
-              padding: EdgeInsets.all(10), // This is the padding
-              minimumSize: Size(150, 50), // This is the minimum size
+              padding: const EdgeInsets.all(10), // This is the padding
+              minimumSize: const Size(150, 50), // This is the minimum size
             ),
             child: const Text(
               'Suivant',
