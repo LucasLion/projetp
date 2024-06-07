@@ -5,14 +5,12 @@ class Levels {
   final int levelNumber;
 
   const Levels({required this.levelNumber});
-  
 
   levelSelection(BuildContext context, int levelNumber) {
     switch (levelNumber) {
       case 1:
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Level1()));
+            context, MaterialPageRoute(builder: (context) => const Level1()));
         break;
       case 2:
         break;

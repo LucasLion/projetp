@@ -7,14 +7,18 @@ class LevelMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed:() {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LevelMapPage())
-        );
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+      ),
+      onPressed: () {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LevelMapPage()));
       },
       child: const Text("Retour au menu"),
     );
   }
 }
-
