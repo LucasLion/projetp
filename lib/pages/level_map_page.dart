@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projetp/utils/player.dart';
 import 'package:projetp/widgets/level_button.dart';
 import 'package:projetp/utils/line_painter.dart';
 
 class LevelMapPage extends StatefulWidget {
-  const LevelMapPage({super.key});
+
+  LevelMapPage({super.key});
 
   @override
   _LevelMapPage createState() {
@@ -42,9 +44,9 @@ class _LevelMapPage extends State<LevelMapPage> {
     final path = CurvedLinePainter()
         .createPath(Size(MediaQuery.of(context).size.width, 2500));
     final metrics = path.computeMetrics().first;
+    final offset = level * metrics.length / 200 + 30 / 2500 * metrics.length;
     final position =
-        metrics.getTangentForOffset(level * metrics.length / 200)?.position ??
-            Offset.zero;
+        metrics.getTangentForOffset(offset)?.position ?? Offset.zero;
     return position;
   }
 
@@ -54,6 +56,12 @@ class _LevelMapPage extends State<LevelMapPage> {
       slivers: [
         SliverToBoxAdapter(
           child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/doodle.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             height: 2500, // Large enough to show the curved line
             child: Stack(
               children: [
@@ -91,9 +99,12 @@ class _LevelMapPage extends State<LevelMapPage> {
           child: const Text('Niveau suivant',
               style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
           onPressed: () {
+            print(
+                "currentLevel: $currentLevel | levels.length: ${levels.length}");
             if (currentLevel < levels.length) {
-              print("currentLevel: $currentLevel");
               currentLevel++;
+              print(
+                  "currentLevel: $currentLevel | levels.length: ${levels.length}");
               final newLevelData = LevelData(
                   level: levels[currentLevel].level,
                   icon: levels[currentLevel].icon,
@@ -102,6 +113,7 @@ class _LevelMapPage extends State<LevelMapPage> {
                 levels[currentLevel] = newLevelData;
               });
               final position = calculateLevelPosition(context, currentLevel);
+              print("position: $position");
               _scrollController.animateTo(
                 (position.dy * 30),
                 duration: const Duration(milliseconds: 1000),
@@ -115,15 +127,11 @@ class _LevelMapPage extends State<LevelMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lime,
-      appBar: AppBar(
-        title: Text('Sélection du Niveau'),
-      ),
       body: _drawLevelsAndLine(),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Container(
+          SizedBox(
             width: 100,
             child: FloatingActionButton(
               heroTag: 'reset',

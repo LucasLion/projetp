@@ -4,9 +4,13 @@ class CurvedLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.limeAccent
-      ..strokeWidth = 50
-      ..style = PaintingStyle.stroke;
+      ..strokeWidth = 40
+      ..style = PaintingStyle.stroke
+      ..shader = const LinearGradient(
+        colors: [Colors.purple, Colors.indigo, Colors.blue, Colors.green, Colors.yellow, Colors.orange, Colors.red],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
 
     final path = createPath(size);
     canvas.drawPath(path, paint);

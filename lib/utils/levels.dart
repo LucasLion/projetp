@@ -4,13 +4,13 @@ import 'package:projetp/levels/level_1.dart';
 class Levels {
   final int levelNumber;
 
-  const Levels({required this.levelNumber});
+  Levels({required this.levelNumber});
 
   levelSelection(BuildContext context, int levelNumber) {
     switch (levelNumber) {
       case 1:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Level1()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Level1()));
         break;
       case 2:
         break;

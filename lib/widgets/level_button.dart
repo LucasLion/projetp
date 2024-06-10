@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/utils/levels.dart';
+import 'package:projetp/utils/player.dart';
 
 class LevelButton extends StatelessWidget {
   final int level;
   final IconData icon;
   final bool unlocked;
 
-  LevelButton({required this.level, required this.icon, required this.unlocked});
+  LevelButton(
+      {required this.level, required this.icon, required this.unlocked});
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +18,16 @@ class LevelButton extends StatelessWidget {
           InkWell(
             child: CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: unlocked ? Colors.green : Colors.grey,
               child: Icon(icon, size: 30, color: Colors.white),
             ),
-            onTap:() {
+            onTap: () {
               Levels levels = Levels(levelNumber: level);
               levels.levelSelection(context, level);
             },
           ),
           const SizedBox(height: 5),
-          if (!unlocked)
-            const Icon(
-                Icons.lock,
-                size: 40,
-                color: Colors.black
-            ),
+          if (!unlocked) const Icon(Icons.lock, size: 40, color: Colors.black),
         ],
       ),
     );

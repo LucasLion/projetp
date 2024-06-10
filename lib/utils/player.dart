@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 
-class Player extends StatefulWidget {
-  final String playerName;
-  final String playerAvatar;
-  final int playerScore;
+class Player extends ChangeNotifier {
+  String playerName;
+  String playerAvatar;
+  int playerScore;
 
-  const Player({
-    super.key,
+  Player({
     required this.playerName,
     required this.playerAvatar,
     required this.playerScore,
     });
 
-  @override
-  _Player createState() {
-    return _Player();
+  void setPlayerName(String name) {
+    playerName = name;
+    notifyListeners();
   }
-}
 
-class _Player extends State<Player> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  void incrementScore() {
+    playerScore++;
+    notifyListeners();}
 }

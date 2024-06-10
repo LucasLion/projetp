@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_map_page.dart';
+import 'package:projetp/utils/player.dart';
 import 'package:projetp/utils/variables.dart';
 import 'package:projetp/widgets/level_menu_button.dart';
+import 'package:provider/provider.dart';
 
 class Level1 extends StatelessWidget {
-  const Level1({super.key});
+
+  const Level1({
+    super.key,
+  });
 
   Widget buildLevel1(context) {
     return Center(
@@ -72,15 +77,16 @@ class Level1 extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => Level1QuestionGenerator(
-                      question: juridicQuiz[0]![0],
-                      answer: juridicQuiz[0]![1],
-                      level: 0),
+                    question: juridicQuiz[0]![0],
+                    answer: juridicQuiz[0]![1],
+                    level: 0,
+                  ),
                 ),
               ),
             },
             child: const Text("Commencer le niveau"),
           ),
-          const LevelMenuButton(),
+          LevelMenuButton(),
         ],
       ),
     );
@@ -121,6 +127,7 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Text("Score: ${Provider.of<Player>(context, listen: false).playerScore}"),
         Text("Question ${widget.level + 1}"),
         const SizedBox(height: 5),
         Container(
@@ -188,7 +195,7 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
               : () {
                   _isAnswered = true;
                   if (trueColor == Colors.green && widget.answer == "Vrai") {
-                    print("Truecolor: $trueColor, Answer: ${widget.answer}");
+                    Provider.of<Player>(context, listen: false).incrementScore();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Bonne réponse!"),
@@ -197,7 +204,7 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
                     );
                   } else if (falseColor == Colors.green &&
                       widget.answer == "Faux") {
-                    print("Falsecolor: $falseColor, Answer: ${widget.answer}");
+                    Provider.of<Player>(context, listen: false).incrementScore();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Bonne réponse!"),
@@ -227,23 +234,32 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
         ElevatedButton(
           onPressed: () => {
             ScaffoldMessenger.of(context).hideCurrentSnackBar(),
-            if (widget.level < 4)
+            if (widget.level < 4 && _isAnswered)
               {
                 widget.level++,
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Level1QuestionGenerator(
-                            question: juridicQuiz[widget.level]![0],
-                            answer: juridicQuiz[widget.level]![1],
-                            level: widget.level)))
+                              question: juridicQuiz[widget.level]![0],
+                              answer: juridicQuiz[widget.level]![1],
+                              level: widget.level,
+                            )))
               }
+            else if (widget.level < 4) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Répondez à la question!"),
+                  backgroundColor: Colors.red,
+                ),
+              )
+            }
             else
               {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const LevelMapPage()))
+                        builder: (context) => LevelMapPage()))
               }
           },
           style: ElevatedButton.styleFrom(

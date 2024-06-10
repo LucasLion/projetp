@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/login_page.dart';
+import 'package:projetp/utils/player.dart';
+import 'package:provider/provider.dart';
+//import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
-  runApp(const MyApp());
+  //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  //FlutterNativeSplash.remove();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Player(playerName: '', playerAvatar: '', playerScore: 0),
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,3 +31,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// whenever your initialization is completed, remove the splash screen:

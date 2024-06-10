@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_map_page.dart';
+import 'package:projetp/utils/player.dart';
 import 'package:projetp/utils/variables.dart';
 
 class SelectAvatar extends StatefulWidget {
-  final String playerName;
 
   const SelectAvatar({
     super.key,
-    required this.playerName,
   });
 
   @override
@@ -65,7 +64,7 @@ class _SelectAvatar extends State<SelectAvatar> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const LevelMapPage(),
+                builder: (context) => LevelMapPage(),
               ));
         },
         child: Padding(
