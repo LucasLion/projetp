@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/select_avatar_page.dart';
 import 'package:projetp/utils/player.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,11 +38,11 @@ class _LoginPageState extends State<LoginPage> {
           ElevatedButton(
             onPressed: () async {
               if (pseudoController.text.isNotEmpty) {
+                Provider.of<Player>(context, listen: false).setPlayerName;
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const SelectAvatar(),
+                      builder: (context) => const SelectAvatar(),
                     ));
               } else {
                 showDialog(

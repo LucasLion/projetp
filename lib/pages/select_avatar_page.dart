@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_map_page.dart';
+import 'package:projetp/utils/player.dart';
 import 'package:projetp/utils/variables.dart';
+import 'package:provider/provider.dart';
 
 class SelectAvatar extends StatefulWidget {
 
@@ -60,6 +62,7 @@ class _SelectAvatar extends State<SelectAvatar> {
       width: MediaQuery.of(context).size.width * 0.2,
       child: InkWell(
         onTap: () {
+          Provider.of<Player>(context, listen: false).setAvatar(avatarsData[index]![3]);
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -68,9 +71,9 @@ class _SelectAvatar extends State<SelectAvatar> {
         },
         child: Padding(
           padding: EdgeInsets.only(
-            left: 10,
-            right: 10,
-            top: MediaQuery.of(context).size.height * 0.1,
+            left: 5,
+            right: 5,
+            top: MediaQuery.of(context).size.height * 0.05,
             bottom: MediaQuery.of(context).size.height * 0.1,
           ),
           child: Container(

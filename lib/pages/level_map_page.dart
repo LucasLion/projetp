@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projetp/pages/profile_page.dart';
 import 'package:projetp/utils/player.dart';
 import 'package:projetp/widgets/level_button.dart';
 import 'package:projetp/utils/line_painter.dart';
+import 'package:provider/provider.dart';
 
 class LevelMapPage extends StatefulWidget {
-
   LevelMapPage({super.key});
 
   @override
@@ -130,20 +131,25 @@ class _LevelMapPage extends State<LevelMapPage> {
       color: Colors.white,
       child: SafeArea(
         child: Scaffold(
-          body: Stack(
-            children: [
-              _drawLevelsAndLine(),
-              Positioned(
-                top: 10.0,
-                left: 10.0,
-                child: InkWell(
-                onTap: () {
-                },
-                child: CircleAvatar(backgroundColor: Colors.purple,)
-              ),
-              ),
-            ]
-          ),
+          body: Stack(children: [
+            _drawLevelsAndLine(),
+            Positioned(
+              top: 10.0,
+              left: 10.0,
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilePage()));
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(
+                        Provider.of<Player>(context, listen: false)
+                            .playerAvatar),
+                  )),
+            ),
+          ]),
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -154,7 +160,8 @@ class _LevelMapPage extends State<LevelMapPage> {
                   backgroundColor: Colors.red,
                   onPressed: resetLevels,
                   child: const Text('Reset',
-                      style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center),
                 ),
               ),
               const SizedBox(height: 10),

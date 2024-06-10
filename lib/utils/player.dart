@@ -9,7 +9,7 @@ class Player extends ChangeNotifier {
     required this.playerName,
     required this.playerAvatar,
     required this.playerScore,
-    });
+  });
 
   void setPlayerName(String name) {
     playerName = name;
@@ -18,5 +18,15 @@ class Player extends ChangeNotifier {
 
   void incrementScore() {
     playerScore++;
-    notifyListeners();}
+    notifyListeners();
+  }
+
+  void setAvatar(String avatar) {
+    playerAvatar = avatar;
+    notifyListeners();
+  }
+
+  void getAvatar() {
+    playerAvatar;
+  } 
 }
