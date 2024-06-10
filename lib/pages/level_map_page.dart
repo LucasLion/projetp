@@ -126,24 +126,42 @@ class _LevelMapPage extends State<LevelMapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _drawLevelsAndLine(),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(
-            width: 100,
-            child: FloatingActionButton(
-              heroTag: 'reset',
-              backgroundColor: Colors.red,
-              onPressed: resetLevels,
-              child: const Text('Reset',
-                  style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-            ),
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Scaffold(
+          body: Stack(
+            children: [
+              _drawLevelsAndLine(),
+              Positioned(
+                top: 10.0,
+                left: 10.0,
+                child: InkWell(
+                onTap: () {
+                },
+                child: CircleAvatar(backgroundColor: Colors.purple,)
+              ),
+              ),
+            ]
           ),
-          const SizedBox(height: 10),
-          _drawFloatingActionButton(),
-        ],
+          floatingActionButton: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: 100,
+                child: FloatingActionButton(
+                  heroTag: 'reset',
+                  backgroundColor: Colors.red,
+                  onPressed: resetLevels,
+                  child: const Text('Reset',
+                      style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                ),
+              ),
+              const SizedBox(height: 10),
+              _drawFloatingActionButton(),
+            ],
+          ),
+        ),
       ),
     );
   }
