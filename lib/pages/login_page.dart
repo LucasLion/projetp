@@ -35,13 +35,13 @@ class _LoginPageState extends State<LoginPage> {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (pseudoController.text.isNotEmpty) {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          SelectAvatar(),
+                          const SelectAvatar(),
                     ));
               } else {
                 showDialog(

@@ -6,7 +6,6 @@ import 'package:projetp/widgets/level_menu_button.dart';
 import 'package:provider/provider.dart';
 
 class Level1 extends StatelessWidget {
-
   const Level1({
     super.key,
   });
@@ -127,7 +126,8 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Score: ${Provider.of<Player>(context, listen: false).playerScore}"),
+        Text(
+            "Score: ${Provider.of<Player>(context, listen: false).playerScore}"),
         Text("Question ${widget.level + 1}"),
         const SizedBox(height: 5),
         Container(
@@ -193,9 +193,21 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
           onPressed: _isAnswered
               ? null
               : () {
-                  _isAnswered = true;
+                  if (trueColor == Colors.transparent && falseColor == Colors.transparent) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Répondez à la question!"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+                  setState(() {
+                    _isAnswered = true;
+                  });
                   if (trueColor == Colors.green && widget.answer == "Vrai") {
-                    Provider.of<Player>(context, listen: false).incrementScore();
+                    Provider.of<Player>(context, listen: false)
+                        .incrementScore();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Bonne réponse!"),
@@ -204,7 +216,8 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
                     );
                   } else if (falseColor == Colors.green &&
                       widget.answer == "Faux") {
-                    Provider.of<Player>(context, listen: false).incrementScore();
+                    Provider.of<Player>(context, listen: false)
+                        .incrementScore();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Bonne réponse!"),
@@ -246,20 +259,19 @@ class _Level1QuestionGeneratorState extends State<Level1QuestionGenerator> {
                               level: widget.level,
                             )))
               }
-            else if (widget.level < 4) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Répondez à la question!"),
-                  backgroundColor: Colors.red,
-                ),
-              )
-            }
+            else if (widget.level < 4)
+              {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Répondez à la question!"),
+                    backgroundColor: Colors.red,
+                  ),
+                )
+              }
             else
               {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LevelMapPage()))
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LevelMapPage()))
               }
           },
           style: ElevatedButton.styleFrom(

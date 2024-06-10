@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projetp/pages/level_map_page.dart';
-import 'package:projetp/utils/player.dart';
 import 'package:projetp/utils/variables.dart';
 
 class SelectAvatar extends StatefulWidget {
@@ -92,6 +91,7 @@ class _SelectAvatar extends State<SelectAvatar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Selectionne ton avatar'),
         centerTitle: true,
