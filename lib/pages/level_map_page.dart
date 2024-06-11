@@ -6,7 +6,7 @@ import 'package:projetp/utils/line_painter.dart';
 import 'package:provider/provider.dart';
 
 class LevelMapPage extends StatefulWidget {
-  LevelMapPage({super.key});
+  const LevelMapPage({super.key});
 
   @override
   _LevelMapPage createState() {
@@ -82,7 +82,7 @@ class _LevelMapPage extends State<LevelMapPage> {
                       unlocked: level.unlocked,
                     ),
                   );
-                }).toList(),
+                }),
               ],
             ),
           ),
@@ -92,7 +92,7 @@ class _LevelMapPage extends State<LevelMapPage> {
   }
 
   Widget _drawFloatingActionButton() {
-    return Container(
+    return SizedBox(
       width: 100,
       child: FloatingActionButton(
           heroTag: 'nextLevel',
@@ -138,16 +138,65 @@ class _LevelMapPage extends State<LevelMapPage> {
               left: 10.0,
               child: InkWell(
                   onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilePage()));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
                   child: CircleAvatar(
+                    radius: 25,
                     backgroundImage: AssetImage(
                         Provider.of<Player>(context, listen: false)
                             .playerAvatar),
                   )),
+            ),
+            Positioned(
+              top: 10,
+              left: 70,
+              child: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const AlertDialog(
+                        title: Text('Info'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text(
+                                  'Le harcèlement est un comportement répétitif qui vise à dégrader la qualité de vie d\'une personne.'),
+                              Text(
+                                  'Il est important de parler du harcèlement si vous en êtes victime ou si vous en êtes témoin.'),
+                              Text(
+                                  'La prévention du harcèlement passe par l\'éducation et la sensibilisation.'),
+                              Text(
+                                  'N\'hésitez pas à demander de l\'aide si vous êtes victime de harcèlement.'),
+                              Text(
+                                  'Ensemble, nous pouvons mettre fin au harcèlement.'),
+                              Text('Numéro d\'aide national : 123-456-7890'),
+                              Text('Numéro d\'aide local : 098-765-4321'),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 184, 62, 196),
+                        width: 2),
+                    borderRadius: BorderRadius.circular(2),
+                    color: const Color.fromARGB(170, 184, 62, 196),
+                  ),
+                  child: const Icon(
+                    Icons.question_mark,
+                    color: Color.fromARGB(255, 111, 61, 116),
+                    size: 30,
+                  ),
+                ),
+              ),
             ),
           ]),
           floatingActionButton: Column(

@@ -57,7 +57,7 @@ class _SelectAvatar extends State<SelectAvatar> {
   }
 
   Widget avatarCart(BuildContext context, int index) {
-    return Container(
+    return SizedBox(
       height: 200,
       width: MediaQuery.of(context).size.width * 0.2,
       child: InkWell(
@@ -151,6 +151,7 @@ class _SelectAvatar extends State<SelectAvatar> {
     );
   }
 
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();

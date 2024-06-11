@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 String currentLevelIcon =
     "assets/images/Basic_GUI_Bundle/Icons/Icon_Small_WhiteOutline_StarGrey.png";

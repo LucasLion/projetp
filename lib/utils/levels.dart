@@ -10,7 +10,7 @@ class Levels {
     switch (levelNumber) {
       case 1:
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => Level1()));
+            MaterialPageRoute(builder: (context) => const Level1()));
         break;
       case 2:
         break;

@@ -7,8 +7,8 @@ class LevelButton extends StatelessWidget {
   final IconData icon;
   final bool unlocked;
 
-  LevelButton(
-      {required this.level, required this.icon, required this.unlocked});
+  const LevelButton(
+      {super.key, required this.level, required this.icon, required this.unlocked});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:projetp/pages/level_map_page.dart';
 import 'package:projetp/utils/player.dart';
 
 class LevelMenuButton extends StatelessWidget {
-  LevelMenuButton({
+  const LevelMenuButton({
     super.key,
   });
 

@@ -5,7 +5,7 @@ import 'package:projetp/utils/player.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   _ProfilePageState createState() {
